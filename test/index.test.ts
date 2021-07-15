@@ -1,5 +1,7 @@
 import File from 'vinyl'
 import { Readable } from 'stream'
+import { EOL } from 'os'
+
 import eol, { PluginOptions } from '../src'
 
 interface Test {
@@ -41,4 +43,4 @@ const run = async (test: Test) => {
   }))
 }
 
-it('should process default options', async () => run({ input: 'hello\nworld', output: 'hello\r\nworld' }))
+it('should process default options', async () => run({ input: 'hello\nworld', output: `hello${EOL}world` }))

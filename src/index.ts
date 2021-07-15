@@ -1,6 +1,7 @@
 import { Transform, TransformCallback } from 'stream'
 import { EOL } from 'os'
-import File from 'vinyl'
+
+import File = require('vinyl')
 
 export interface PluginOptions {
   encoding?: BufferEncoding
