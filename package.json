@@ -1,7 +1,7 @@
 {
   "name": "@gulp-plugin/eol",
   "description": "Gulp plugin to ensure consistent end of line characters.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "lib/index.js",
   "types": "typings/index.d.ts",
   "publishConfig": {

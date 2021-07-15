@@ -8,13 +8,19 @@ export interface PluginOptions {
   eol?: string
 }
 
-export function eol({ encoding, eol }: PluginOptions = { eol: EOL }): Transform {
+export function eol({ encoding, eol }: PluginOptions = {}): Transform {
   return new Transform({
     objectMode: true,
-    transform (file: File, encode: BufferEncoding, callback: TransformCallback) {
-      file.contents = Buffer.from(file.contents.toString().split(/\r\n|\n|\r/g).join(eol), encoding ?? encode)
+    transform(file: File, encode: BufferEncoding, callback: TransformCallback) {
+      file.contents = Buffer.from(
+        file.contents
+          .toString(encoding ?? encode)
+          .split(/\r\n|\n|\r/g)
+          .join(eol ?? EOL),
+        encoding ?? encode
+      )
       callback(null, file)
-    }
+    },
   })
 }
 

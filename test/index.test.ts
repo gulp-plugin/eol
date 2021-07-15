@@ -5,26 +5,28 @@ import { EOL } from 'os'
 import eol, { PluginOptions } from '../src'
 
 interface Test {
-  options?: PluginOptions,
-  input?: string,
-  output?: string,
+  options?: PluginOptions
+  input?: Buffer
+  output?: Buffer
   error?: string
 }
 
 const run = async (test: Test) => {
-  return new Promise<void>(((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     const input = new File({
-      contents: test.input == undefined ? undefined : Buffer.from(test.input)
+      contents: test.input,
     })
 
     try {
       Readable.from([input])
-        .pipe(eol())
+        .pipe(eol(test.options))
         .on('data', (file: File) => {
-          expect(file.contents?.toString()).toEqual(test.output)
+          if ('equals' in file.contents) {
+            expect(file.contents?.equals(test.output)).toBeTruthy()
+          }
         })
         .on('end', resolve)
-        .on('error', err => {
+        .on('error', (err) => {
           if (test.error) {
             expect(test.error).toEqual(err.message)
             return resolve()
@@ -40,7 +42,22 @@ const run = async (test: Test) => {
 
       reject(e)
     }
-  }))
+  })
 }
 
-it('should process default options', async () => run({ input: 'hello\nworld', output: `hello${EOL}world` }))
+it('should process default options', () =>
+  run({ input: Buffer.from('hello\nworld'), output: Buffer.from(`hello${EOL}world`) }))
+
+it('should support encodings', () =>
+  run({
+    input: Buffer.from('hello\nworld', 'utf16le'),
+    output: Buffer.from(`hello${EOL}world`, 'utf16le'),
+    options: { encoding: 'utf16le' },
+  }))
+
+it('should support custom eol', () =>
+  run({
+    input: Buffer.from('hello\nworld'),
+    output: Buffer.from('hello\tworld'),
+    options: { eol: '\t' },
+  }))
