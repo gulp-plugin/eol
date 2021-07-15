@@ -2,7 +2,7 @@
 
 
 [![Build](https://github.com/gulp-plugin/eol/actions/workflows/node.js.yml/badge.svg)](https://github.com/gulp-plugin/eol/actions/workflows/node.js.yml)
-[![Coverage Status](https://coveralls.io/repos/github/gulp-plugin/eol/badge.svg?branch=master)](https://coveralls.io/github/gulp-plugin/eol?branch=master) [![dependencies Status](https://david-dm.org/gulp-plugin/eol/status.svg)](https://david-dm.org/gulp-plugin/eol)
+[![Coverage Status](https://coveralls.io/repos/github/gulp-plugin/eol/badge.svg?branch=main)](https://coveralls.io/github/gulp-plugin/eol?branch=main) [![dependencies Status](https://david-dm.org/gulp-plugin/eol/status.svg)](https://david-dm.org/gulp-plugin/eol)
 
 Gulp plugin to ensure consistent end of line characters.
 
