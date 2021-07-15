@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        /* Module/Target Options */
+        "target": "es6",
+        "lib": ["es2019", "es2020.string"],
+        "module": "commonjs",
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "./lib",
+        "declarationDir": "./typings",
+        /* Strict Type-Checking Options */
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        /* Basic Options */
+        /* Extra Options */
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "rootDir": "./src",
+        "baseUrl": "."
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "lib",
+        "node_modules"
+    ]
+}
